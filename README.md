@@ -1,6 +1,6 @@
 # Northwestern API Project
 
-> A project for browsing and searching themoviedb.org API.
+> A project for browsing and searching themoviedb.org API. A hosted version can be viewed at http://198.199.71.114:8000/
 
 ## Technologies used
 	- Vue.JS for frontend
@@ -23,7 +23,7 @@ docker-compose up
 cd server && npm install
 
 # run express.js server that will be serving the api
-cd .. &&  node server/server.js &
+cd .. && node server/server.js &
 
 # install frontend dependencies
 npm install
