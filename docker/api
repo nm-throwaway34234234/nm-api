@@ -1,0 +1,21 @@
+FROM ubuntu
+
+RUN apt-get update
+RUN apt-get install curl -y
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nginx nodejs
+
+RUN mkdir /opt/movies
+
+COPY . /opt/movies
+RUN rm -rf /opt/movies/server/node_modules
+RUN cd /opt/movies/server && npm install
+RUN rm -rf /opt/movies/node_modules
+RUN cd /opt/movies && npm install
+# there's probably a better way to do this, not fully sure on with the build process
+# change app to use default path of it self
+RUN sed -i 's/http:\/\/localhost:3333//g' /opt/movies/utils/moviedb-api.js 
+WORKDIR /opt/movies
+RUN node build/build.js
+
+COPY docker/nginx.conf /etc/nginx/sites-enabled/default

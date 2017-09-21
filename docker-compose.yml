@@ -1,0 +1,9 @@
+version: '2'
+services:
+  api:
+    build:
+       context: .
+       dockerfile: docker/api
+    command: /bin/bash -c 'nginx && node /opt/movies/server/server.js'
+    ports:
+      - "8000:80"
